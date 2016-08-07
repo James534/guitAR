@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System;
 
 public class SongPlayer : MonoBehaviour
 {
@@ -9,18 +11,26 @@ public class SongPlayer : MonoBehaviour
     const float BEAT_TO_SEC = 0.5f;
 
     GameObject[] tabObjects;
-
     List<GameObject> currentNotes;
+
+    List<string> playedTabs;
 
     int tabIndex = 0;
     float deltaT = 0;
     public float zoffset = 33, xoffset = 20;
 
     public bool done = false;
+<<<<<<< HEAD
 
     // Use this for initialization
     void Start()
     {
+=======
+    bool donePlaying = false;
+
+	// Use this for initialization
+	void Start () {
+>>>>>>> 16c1e41f7ccd1b0cc63a76e19f3f83dc52ab6e76
         Debug.Log("Starting song player!");
         tabs = SongLibary.getJingleBells();
         tabObjects = new GameObject[6];
@@ -29,24 +39,65 @@ public class SongPlayer : MonoBehaviour
             tabObjects[i] = (GameObject)Resources.Load("" + (i + 1));
 
         currentNotes = new List<GameObject>();
+        playedTabs = new List<string>();
     }
 
+    string genNotesKey(Note n)
+    {
+        return "" + n.strNum + "," + n.tabNum;
+    }
+
+<<<<<<< HEAD
     // Update is called once per frame
     void Update()
     {
+=======
+	// Update is called once per frame
+	void Update ()
+    {
+        if (done)
+        {
+            return;
+        }
+        if (donePlaying && currentNotes.Count == 0)
+        {
+            done = true;
+        }
+        if (!SocketListener.read) {
+            string[] clientMsg = SocketListener.msg.Split(';');
+            SocketListener.read = true;
+            for (int i = 0; i < clientMsg.Length; i++)
+            {
+                int[] noteProperties = Array.ConvertAll<string, int>(clientMsg[i].Split(','), int.Parse);
+                for (int n = 0; n < currentNotes.Count; n++)
+                {
+                    NoteObject curNote = currentNotes[n].GetComponent<NoteObject>();
+                    if (curNote.note.strNum == noteProperties[0] && curNote.note.tabNum == noteProperties[1])
+                    {
+                        print("Hitting note " + clientMsg[i]);
+                        curNote.hit = true;
+                        break;
+                    }
+                }
+            }
+        }
+>>>>>>> 16c1e41f7ccd1b0cc63a76e19f3f83dc52ab6e76
         for (int i = 0; i < currentNotes.Count; i++)
         {
             GameObject toDelete = currentNotes[i];
-            NoteObject n = (NoteObject)toDelete.GetComponent<NoteObject>();
-            if (n.done)
+            NoteObject n = toDelete.GetComponent<NoteObject>();
+            if (n.hit)
+            {
+                print("Hit note!");
+                currentNotes.RemoveAt(i);
+                Destroy(toDelete);
+                continue;
+            }
+            else if (n.done)
             {
                 currentNotes.RemoveAt(i);
                 GameObject.Destroy(toDelete);
             }
-        }
-        if (done)
-        {
-            return;
         }
         deltaT -= Time.deltaTime;
         if (deltaT <= 0)
@@ -54,16 +105,24 @@ public class SongPlayer : MonoBehaviour
             for (int i = 0; i < tabs[tabIndex].Count; i++)
             {
                 Note n = tabs[tabIndex][i];
+<<<<<<< HEAD
                 GameObject newNote = Instantiate(tabObjects[n.strNum - 1]);
                 Vector3 pos = new Vector3(xoffset, -25.54f, zoffset - (-1 + n.tabNum * 3.5f));
                 newNote.transform.position = pos;
                 currentNotes.Add(newNote);
+=======
+                GameObject newNoteObj = Instantiate(tabObjects[n.strNum-1]);
+                newNoteObj.GetComponent<NoteObject>().note = new Note(n.strNum, n.tabNum, n.dur);
+                Vector3 pos = new Vector3(xoffset, 0, zoffset - (-1 + n.tabNum * 3.5f));
+                newNoteObj.transform.position = pos;
+                currentNotes.Add(newNoteObj);
+>>>>>>> 16c1e41f7ccd1b0cc63a76e19f3f83dc52ab6e76
                 deltaT = n.dur * BEAT_TO_SEC;
             }
             tabIndex++;
             if (tabIndex > tabs.Count - 1)
             {
-                done = true;
+                donePlaying = true;
                 Debug.Log("Done song!");
             }
         }
