@@ -15,10 +15,11 @@ public class SongPlayer : MonoBehaviour {
     float deltaT = 0;
     public float zoffset = 33, xoffset = 20;
 
-    bool done = false;
+    public bool done = false;
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("Starting song player!");
         tabs = SongLibary.getJingleBells();
         tabObjects = new GameObject[6];
         for (int i = 0; i < 6; i++)
