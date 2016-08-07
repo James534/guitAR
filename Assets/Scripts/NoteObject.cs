@@ -14,8 +14,8 @@ public class NoteObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector3 pos = transform.position;
-        pos.y -= speed;
-        if (pos.y < 1)
+        pos.x -= speed;
+        if (pos.x < 8)
         {
             done = true;
             return;

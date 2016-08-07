@@ -13,6 +13,7 @@ public class SongPlayer : MonoBehaviour {
 
     int tabIndex = 0;
     float deltaT = 0;
+    public float zoffset = 33, xoffset = 20;
 
     bool done = false;
 
@@ -50,7 +51,7 @@ public class SongPlayer : MonoBehaviour {
             {
                 Note n = tabs[tabIndex][i];
                 GameObject newNote = Instantiate(tabObjects[n.strNum-1]);
-                Vector3 pos = new Vector3(-1 + n.tabNum, 5, n.strNum-1);
+                Vector3 pos = new Vector3(xoffset, 0, zoffset - (-1 + n.tabNum * 3.5f));
                 newNote.transform.position = pos;
                 currentNotes.Add(newNote);
                 deltaT = n.dur * BEAT_TO_SEC;
