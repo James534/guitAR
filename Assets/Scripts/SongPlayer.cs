@@ -20,18 +20,11 @@ public class SongPlayer : MonoBehaviour
     public float zoffset = 33, xoffset = 20;
 
     public bool done = false;
-<<<<<<< HEAD
-
-    // Use this for initialization
-    void Start()
-    {
-=======
     bool donePlaying = false;
 
-	// Use this for initialization
-	void Start () {
->>>>>>> 16c1e41f7ccd1b0cc63a76e19f3f83dc52ab6e76
-        Debug.Log("Starting song player!");
+    // Use this for initialization
+    void Start () {
+            Debug.Log("Starting song player!");
         tabs = SongLibary.getJingleBells();
         tabObjects = new GameObject[6];
         for (int i = 0; i < 6; i++)
@@ -47,11 +40,6 @@ public class SongPlayer : MonoBehaviour
         return "" + n.strNum + "," + n.tabNum;
     }
 
-<<<<<<< HEAD
-    // Update is called once per frame
-    void Update()
-    {
-=======
 	// Update is called once per frame
 	void Update ()
     {
@@ -81,7 +69,6 @@ public class SongPlayer : MonoBehaviour
                 }
             }
         }
->>>>>>> 16c1e41f7ccd1b0cc63a76e19f3f83dc52ab6e76
         for (int i = 0; i < currentNotes.Count; i++)
         {
             GameObject toDelete = currentNotes[i];
@@ -105,18 +92,11 @@ public class SongPlayer : MonoBehaviour
             for (int i = 0; i < tabs[tabIndex].Count; i++)
             {
                 Note n = tabs[tabIndex][i];
-<<<<<<< HEAD
-                GameObject newNote = Instantiate(tabObjects[n.strNum - 1]);
-                Vector3 pos = new Vector3(xoffset, -25.54f, zoffset - (-1 + n.tabNum * 3.5f));
-                newNote.transform.position = pos;
-                currentNotes.Add(newNote);
-=======
                 GameObject newNoteObj = Instantiate(tabObjects[n.strNum-1]);
                 newNoteObj.GetComponent<NoteObject>().note = new Note(n.strNum, n.tabNum, n.dur);
                 Vector3 pos = new Vector3(xoffset, 0, zoffset - (-1 + n.tabNum * 3.5f));
                 newNoteObj.transform.position = pos;
                 currentNotes.Add(newNoteObj);
->>>>>>> 16c1e41f7ccd1b0cc63a76e19f3f83dc52ab6e76
                 deltaT = n.dur * BEAT_TO_SEC;
             }
             tabIndex++;
