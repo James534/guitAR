@@ -5,6 +5,8 @@ public class NoteObject : MonoBehaviour {
 
     float speed = 0.05f;
     public bool done = false;
+    public bool hit = false;
+    public Note note;
 
 	// Use this for initialization
 	void Start () {
