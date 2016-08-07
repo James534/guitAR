@@ -25,7 +25,14 @@ public class SongPlayer : MonoBehaviour
     // Use this for initialization
     void Start () {
             Debug.Log("Starting song player!");
-        tabs = SongLibary.getJingleBells();
+        if (MainScript.musicName.Equals("countingstars"))
+        {
+            tabs = SongLibary.getCountingStars();
+        }else
+        {
+            tabs = SongLibary.getJingleBells();
+        }
+
         tabObjects = new GameObject[6];
         for (int i = 0; i < 6; i++)
             //tabObjects[i] = (GameObject)Resources.Load("String"+(i+1));

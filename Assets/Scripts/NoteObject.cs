@@ -4,7 +4,7 @@ using System.Collections;
 public class NoteObject : MonoBehaviour
 {
 
-    float speed = 0.01f;
+    float speed = 0.05f;
     public bool done = false;
     public bool hit = false;
     public Note note;

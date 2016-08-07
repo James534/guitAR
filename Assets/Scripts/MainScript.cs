@@ -3,11 +3,13 @@ using System.Collections;
 
 public class MainScript : MonoBehaviour {
 
-    string musicName = "";
+    public static string musicName = "";
     GameObject canvas;
     GameObject canvasObj;
     GameObject songPlayer;
     GameObject playing = null;
+
+    float dt = 0;
 
 	// Use this for initialization
 	void Start ()
@@ -38,8 +40,17 @@ public class MainScript : MonoBehaviour {
 
     private void handleKeyboard()
     {
+        dt += Time.deltaTime;
+        if (dt > 5)
+        {
+            setSong("Jingle bells");
+        }
         if (Input.GetKeyDown("1"))
             setSong("Jingle bells");
+        else if (RESTClient.str.Length > 0)
+        {
+            setSong(RESTClient.str);
+        }
     }
 
     public void setSong(string name)
