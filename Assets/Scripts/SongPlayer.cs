@@ -47,10 +47,6 @@ public class SongPlayer : MonoBehaviour
         {
             return;
         }
-        if (donePlaying && currentNotes.Count == 0)
-        {
-            done = true;
-        }
         if (!SocketListener.read) {
             string[] clientMsg = SocketListener.msg.Split(';');
             SocketListener.read = true;
@@ -86,6 +82,12 @@ public class SongPlayer : MonoBehaviour
                 GameObject.Destroy(toDelete);
             }
         }
+        if (donePlaying && currentNotes.Count == 0)
+        {
+            done = true;
+            return;
+        }
+
         deltaT -= Time.deltaTime;
         if (deltaT <= 0)
         {

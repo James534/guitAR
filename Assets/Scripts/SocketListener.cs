@@ -4,6 +4,7 @@ using System.Threading;
 using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 
 public class SocketListener : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class SocketListener : MonoBehaviour
     Thread t;
     Client c;
     public static string msg = "";
-    public static bool read = false;
+    public static bool read = true;
 
     // Use this for initialization
     void Start()
@@ -65,7 +66,7 @@ public class SocketListener : MonoBehaviour
                         if (!recv.Equals("Input"))
                         {
                             Debug.Log(recv);
-                            msg = recv;
+                            msg = Regex.Replace(recv, @"\t|\n|\r", "");
                             read = false;
                         }
                     }
