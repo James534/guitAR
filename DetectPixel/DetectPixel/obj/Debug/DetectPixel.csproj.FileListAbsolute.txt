@@ -1,0 +1,6 @@
+c:\users\jerry\documents\visual studio 2015\Projects\DetectPixel\DetectPixel\bin\Debug\DetectPixel.exe.config
+c:\users\jerry\documents\visual studio 2015\Projects\DetectPixel\DetectPixel\bin\Debug\DetectPixel.exe
+c:\users\jerry\documents\visual studio 2015\Projects\DetectPixel\DetectPixel\bin\Debug\DetectPixel.pdb
+c:\users\jerry\documents\visual studio 2015\Projects\DetectPixel\DetectPixel\obj\Debug\DetectPixel.csprojResolveAssemblyReference.cache
+c:\users\jerry\documents\visual studio 2015\Projects\DetectPixel\DetectPixel\obj\Debug\DetectPixel.exe
+c:\users\jerry\documents\visual studio 2015\Projects\DetectPixel\DetectPixel\obj\Debug\DetectPixel.pdb
